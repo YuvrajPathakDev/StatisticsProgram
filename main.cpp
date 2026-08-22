@@ -79,7 +79,7 @@ int main () {
     sdofData = standardDeviation (sumOfObsSquared,numObs,meanOfObs); 
     std::cout<<"Standard Deviation: "<<sdofData<<std::endl ; 
     std::cout<<"Variance: "<<std::pow(sdofData,2)<<std::endl; 
-
+    std::cout<<"Coefficient of Variation: "<<(sdofData/meanOfObs)*100<<"%"<<std::endl ; 
 
 
 
