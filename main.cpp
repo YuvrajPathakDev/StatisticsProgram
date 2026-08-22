@@ -16,6 +16,7 @@ double dataMean(int numObs, double sumObs) {
 double dataMedian(const std::vector<double>&dataset, int numObs  ) {
     std::vector<double>vectorForSorting = dataset; 
     std::sort(vectorForSorting.begin(),vectorForSorting.end()); 
+    
     // std::cout<<numOfObserve<<std::endl ; 
     // std::cout<<typeid(numOfObserve).name()<<std::endl ; //checking the type of numofObserve: it is double 
 
@@ -26,12 +27,12 @@ double dataMedian(const std::vector<double>&dataset, int numObs  ) {
 
 
     if(remFromsizeOfMedian == 0 ){
-        return (dataset[numObs/2 -1]+dataset[numObs/2])/2; 
+        return (vectorForSorting[numObs/2 -1]+vectorForSorting[numObs/2])/2; 
         
         
     }
     else{
-        return dataset[numObs/2] ; // -1 because index starts from zero
+        return vectorForSorting[numObs/2] ; // -1 because index starts from zero
     }
 }
 
@@ -48,11 +49,17 @@ int main () {
     int numObs ; //Number of Observations (N)
     double sumOfObsSquared = 0 ; //Squared Sum of Observations 
     double meanOfObs; 
-    double  medianOfObs ; 
+    double  medianOfObs ;   
     double sdofData ; 
+    double maxValue, minValue ; 
 
     std::vector<double> dataset = {12,30,21,16,13}; 
     numObs = dataset.size() ; 
+
+
+    maxValue =*std::max_element(dataset.begin() , dataset.end() ); 
+    minValue =*std::min_element(dataset.begin() , dataset.end());
+    
 
     std::cout<<"The given DATASET is"<<std::endl ; 
 
@@ -76,10 +83,15 @@ int main () {
     medianOfObs = dataMedian (dataset,numObs);
     std::cout<<"Median: "<<medianOfObs<<std::endl; 
 
+    std::cout<<"Maximum Value: "<<maxValue<<std::endl ; 
+    std::cout<<"Minimum Value:"<<minValue<<std::endl ; 
     sdofData = standardDeviation (sumOfObsSquared,numObs,meanOfObs); 
     std::cout<<"Standard Deviation: "<<sdofData<<std::endl ; 
     std::cout<<"Variance: "<<std::pow(sdofData,2)<<std::endl; 
-    std::cout<<"Coefficient of Variation: "<<(sdofData/meanOfObs)*100<<"%"<<std::endl ; 
+    std::cout<<"Coefficient of Variation: "<<(sdofData/meanOfObs)*100<<"%"<<std::endl ;
+    std::cout<<"Range: " <<maxValue - minValue <<std::endl; 
+    
+    
 
 
 
