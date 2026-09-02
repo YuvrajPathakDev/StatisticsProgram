@@ -44,6 +44,52 @@ double standardDeviation (double sumOfObsSquared, int numObs, double meanofData)
 
 }
 
+void dataMode(const std::vector<double>&dataset){
+    std::vector<double>SortingDataset = dataset; 
+
+    std::sort(SortingDataset.begin(), SortingDataset.end()); 
+    std::vector<double>mode ; 
+    int maxCount = 0 ; 
+
+
+    for (size_t i = 0 ; i<SortingDataset.size() ;){
+        
+        double currentValue = SortingDataset[i];
+        int currentCount = 0 ; 
+        
+        while (i< SortingDataset.size() && SortingDataset[i]==currentValue){
+
+            i++ ; 
+            currentCount ++ ; 
+    
+        }
+        
+
+        if (currentCount>maxCount){
+            maxCount = currentCount; 
+            mode.clear(); 
+            mode.push_back(currentValue);
+
+        }
+        else if(currentCount==maxCount){
+            mode.push_back(currentValue) ; 
+
+        }
+
+    }
+    
+
+    std::cout <<"Mode(s):"; 
+    for (double m:mode){
+        std::cout<<m<<"   ";
+    }
+    std::cout<<"\nFrequency Count: "<<maxCount<<"\n"; 
+
+
+
+    
+}
+
 int main () {
     double sumObs = 0 ; //Sum of Observations 
     int numObs ; //Number of Observations (N)
@@ -53,7 +99,7 @@ int main () {
     double sdofData ; 
     double maxValue, minValue ; 
 
-    std::vector<double> dataset = {12,30,21,16,13}; 
+    std::vector<double> dataset = {12,16,13,19,20,30,21,16,13,13}; 
     numObs = dataset.size() ; 
 
 
@@ -91,6 +137,8 @@ int main () {
     std::cout<<"Coefficient of Variation: "<<(sdofData/meanOfObs)*100<<"%"<<std::endl ;
     std::cout<<"Range: " <<maxValue - minValue <<std::endl; 
     
+    dataMode(dataset) ; 
+
     
 
 
